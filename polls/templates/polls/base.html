@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset = "UTF-8">
+	<meta name="viewport" content="widh=device-width initial-scale=1 shrink-tofit=no">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'polls/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'polls/css/main.css' %}">
+	<title>Home</title>
+</head>
+<body>
+	<header role = "banner">
+		<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="background-color: #c84343">
+        	<div class="container">
+        		<h1 style="color: #f7cac9">Recipes Home</h1>
+        		<div class="collapse navbar-collapse" id="navbarToggle"></div>
+        	</div>
+    	</nav>
+    </header class="site-header"> 
+	<main role="main" class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="content-section">
+            <h3>Query Settings</h3>
+            <p class="text-muted">Query
+            	<div class="input-group mb-3">
+				  <input type="text" class="form-control" placeholder="Write your query here" aria-label="Query" aria-describedby="basic-addon1">
+				</div>
+            </p>
+            <p class='text-muted'>Fields
+              	<div class="form-check">
+				  	<input class="form-check-input" type="checkbox" value="" id="category" checked>
+				  	<label class="form-check-label" for="category">
+				    	Category
+				  </label>
+				</div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="checkbox" value="" id="name">
+				  	<label class="form-check-label" for="name">
+				    	Name
+				  	</label>
+				</div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="checkbox" value="" id="ingredients">
+				  	<label class="form-check-label" for="ingredients">
+				    	Ingredients
+				  	</label>
+				</div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="checkbox" value="" id="directions">
+				  	<label class="form-check-label" for="directions">
+				    	Directions
+				  	</label>
+				</div>
+            </p>
+            <p class='text-muted'>Analyzer
+            	<fieldset class="form-group">
+	            	<div class="form-check">
+					  	<input class="form-check-input" type="radio" name="analyzer" id="simple" value="opt1" checked>
+					  	<label class="form-check-label" for="simple">
+					    	Simple Analyzer
+					  	</label>
+					</div>
+					<div class="form-check">
+					  	<input class="form-check-input" type="radio" name="analyzer" id="whitespace" value="opt2">
+					  	<label class="form-check-label" for="whitespace">
+					    	Whitespace Analyzer
+					  	</label>
+					</div>
+					<div class="form-check">
+					  	<input class="form-check-input" type="radio" name="analyzer" id="standard" value="opt3">
+					  	<label class="form-check-label" for="standard">
+					    	Standard Analyzer
+					  	</label>
+					</div>
+					<div class="form-check">
+					  	<input class="form-check-input" type="radio" name="analyzer" id="english" value="opt3">
+					  	<label class="form-check-label" for="english">
+					    	English Analyzer
+					  	</label>
+					</div>
+				</fieldset>
+            </p>
+            <button class="btn btn-primary" type="submit">Send</button>
+          </div>
+        </div>
+        <div class="col-md-8">
+          	<div class="content-section">
+          		{% block content %}{% endblock %}
+      		</div>
+        </div>
+      </div>
+    </main>
+	<script type="text/javascript" href="{% static 'polls/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" href="{% static 'polls/js/jquery-3.6.0.min.js' %}"></script>
+</body>
+</html>
