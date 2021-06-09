@@ -15,7 +15,7 @@
 		    {% for i in results %}
 		      <tr>
 		        <td>{{i.category}}</td>
-		        <td>{{i.name}}</td>
+		        <td><a target="_blank" href="{{ i.link }}">{{i.name}}</a></td>
 		        <td>{{i.ingredients}}</td>
 		        <td>{{i.directions}}</td>
 		      </tr>
@@ -23,4 +23,27 @@
 		    {% endif %}
 		</tbody>
 	</table>
+	{% if results.has_other_pages %}
+		<ul class="pagination">
+			{% if results.has_previous %}
+				<li><a href="?page={{ results.previous_page_number }}">&laquo;</a></li>
+			{% else %}
+				<li class="disabled"><span>&laquo;</span></li>
+			{% endif %}
+
+			{% for i in results.paginator.page_range %}
+				{% if results.number == i %}
+					<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+				{% else %}
+					<li><a href="?page={{ i }}">{{ i }}</a></li>
+				{% endif %}
+			{% endfor %}
+
+			{% if results.has_next %}
+				<li><a href="?page={{ results.next_page_number }}">&raquo;</a></li>
+			{% else %}
+				<li class="disabled"><span>&raquo;</span></li>
+			{% endif %}
+		</ul>
+	{% endif %}
 {% endblock content %}
