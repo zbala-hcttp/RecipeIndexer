@@ -30,9 +30,6 @@ def home(request):
 	else:
 		fields["directions"] = False
 
-	url_string = "?" + request.GET.urlencode()
-	if not "page" in request.GET:
-		url_string += "&page=1"
 	query = request.GET.get("query")
 	analyzer = request.GET.get("analyzer")
 
@@ -45,4 +42,4 @@ def home(request):
 		results = paginator_.page(1)
 	except:
 		results = paginator_.page(paginator_.num_pages)
-	return render(request, 'polls/home.html', {'results' : results, 'url_string' : url_string})
+	return render(request, 'polls/home.html', {'results' : results, 'fields' : fields, 'query' : query, 'analyzer' : analyzer})

@@ -71,6 +71,20 @@
     <div class="col-md-8">
         <div class="content-section">
 			<h3>Results</h3>
+			<span> for query: {{ query }}, fields: 
+				{% for key, value in fields.items %}
+					{{ key }}, 
+				{% endfor %}
+				{% if analyzer == opt1 %}
+					simple analyzer
+				{% elif analyzer == opt2 %}
+					whitespace analyzer
+				{% elif analyzer == opt3 %}
+					standard analyzer
+				{% else %}
+					english analyzer
+				{% endif %}
+			</span>
 			<table class="table  table-hover">
 				<thead class="thead-dark">
 				  	<tr>
