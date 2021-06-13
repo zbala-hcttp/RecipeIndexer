@@ -1,49 +1,121 @@
 {% extends "polls/base.html" %}
 {% block content %}
-	<h3>Results</h3>
-	<table class="table  table-hover">
-		<thead class="thead-dark">
-		  	<tr>
-			  	<th scope="col">Category</th>
-			  	<th scope="col">Name</th>
-			  	<th scope="col">Ingredients</th>
-			  	<th scope="col">Directions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% if results %}  
-		    {% for i in results %}
-		      <tr>
-		        <td>{{i.category}}</td>
-		        <td><a target="_blank" href="{{ i.link }}">{{i.name}}</a></td>
-		        <td>{{i.ingredients}}</td>
-		        <td>{{i.directions}}</td>
-		      </tr>
-		    {% endfor %}
-		    {% endif %}
-		</tbody>
-	</table>
-	{% if results.has_other_pages %}
-		<ul class="pagination">
-			{% if results.has_previous %}
-				<li><a href="?page={{ results.previous_page_number }}">&laquo;</a></li>
-			{% else %}
-				<li class="disabled"><span>&laquo;</span></li>
-			{% endif %}
 
-			{% for i in results.paginator.page_range %}
-				{% if results.number == i %}
-					<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-				{% else %}
-					<li><a href="?page={{ i }}">{{ i }}</a></li>
-				{% endif %}
-			{% endfor %}
+    <div class="col-md-4">
+        <div class="content-section">
+        	<form>
+            <h3>Query Settings</h3>
+            <p class="text-muted">Query
+            	<div class="input-group mb-3">
+				  <input type="text" class="form-control" placeholder="Write your query here" aria-label="Query" aria-describedby="basic-addon1" name="query">
+				</div>
+            </p>
+            <p class='text-muted'>Fields
+              	<div class="form-check">
+				  	<input class="form-check-input" type="checkbox" value="" name="category" id="category" checked>
+				  	<label class="form-check-label" for="category">
+				    	Category
+				  </label>
+				</div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="checkbox" value="" name="name" id="name">
+				  	<label class="form-check-label" for="name">
+				    	Name
+				  	</label>
+				</div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="checkbox" value="" name="ingredients" id="ingredients">
+				  	<label class="form-check-label" for="ingredients">
+				    	Ingredients
+				  	</label>
+				</div>
+				<div class="form-check">
+				  	<input class="form-check-input" type="checkbox" value="" name="directions" id="directions">
+				  	<label class="form-check-label" for="directions">
+				    	Directions
+				  	</label>
+				</div>
+            </p>
+            <p class='text-muted'>Analyzer
+            	<fieldset class="form-group">
+	            	<div class="form-check">
+					  	<input class="form-check-input" type="radio" name="analyzer" id="simple" value="opt1" checked>
+					  	<label class="form-check-label" for="simple">
+					    	Simple Analyzer
+					  	</label>
+					</div>
+					<div class="form-check">
+					  	<input class="form-check-input" type="radio" name="analyzer" id="whitespace" value="opt2">
+					  	<label class="form-check-label" for="whitespace">
+					    	Whitespace Analyzer
+					  	</label>
+					</div>
+					<div class="form-check">
+					  	<input class="form-check-input" type="radio" name="analyzer" id="standard" value="opt3">
+					  	<label class="form-check-label" for="standard">
+					    	Standard Analyzer
+					  	</label>
+					</div>
+					<div class="form-check">
+					  	<input class="form-check-input" type="radio" name="analyzer" id="english" value="opt4">
+					  	<label class="form-check-label" for="english">
+					    	English Analyzer
+					  	</label>
+					</div>
+				</fieldset>
+            </p>
+            <button class="btn btn-primary" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="content-section">
+			<h3>Results</h3>
+			<table class="table  table-hover">
+				<thead class="thead-dark">
+				  	<tr>
+					  	<th scope="col">Category</th>
+					  	<th scope="col">Name</th>
+					  	<th scope="col">Ingredients</th>
+					  	<th scope="col">Directions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% if results %}  
+				    {% for i in results %}
+				      <tr>
+				        <td>{{i.category}}</td>
+				        <td><a target="_blank" href="{{ i.link }}">{{i.name}}</a></td>
+				        <td>{{i.ingredients}}</td>
+				        <td>{{i.directions}}</td>
+				      </tr>
+				    {% endfor %}
+				    {% endif %}
+				</tbody>
+			</table>
+			{% if results.has_other_pages %}
+				<ul class="pagination">
+					{% if results.has_previous %}
+						<li><a href="?page={{ results.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&laquo;</a></li>
+					{% else %}
+						<li class="disabled"><span>&laquo;</span></li>
+					{% endif %}
 
-			{% if results.has_next %}
-				<li><a href="?page={{ results.next_page_number }}">&raquo;</a></li>
-			{% else %}
-				<li class="disabled"><span>&raquo;</span></li>
+					{% for i in results.paginator.page_range %}
+						{% if results.number == i %}
+							<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+						{% else %}
+							<li><a href="?page={{ i }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ i }}</a></li>
+						{% endif %}
+					{% endfor %}
+
+					{% if results.has_next %}
+						<li><a href="?page={{ results.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&raquo;</a></li>
+					{% else %}
+						<li class="disabled"><span>&raquo;</span></li>
+					{% endif %}
+				</ul>
 			{% endif %}
-		</ul>
-	{% endif %}
+		</div>
+	</div>
 {% endblock content %}
