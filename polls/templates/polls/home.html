@@ -73,17 +73,20 @@
 			<h3>Results</h3>
 			<span> for query: {{ query }}, fields: 
 				{% for key, value in fields.items %}
-					{{ key }}, 
+					{% if value == True %}
+						{{ key }},
+					{% endif %} 
 				{% endfor %}
-				{% if analyzer == opt1 %}
+				{% if analyzer == "opt1" %}
 					simple analyzer
-				{% elif analyzer == opt2 %}
+				{% elif analyzer == "opt2" %}
 					whitespace analyzer
-				{% elif analyzer == opt3 %}
+				{% elif analyzer == "opt3" %}
 					standard analyzer
 				{% else %}
 					english analyzer
 				{% endif %}
+				, total results: {{ total }}
 			</span>
 			<table class="table  table-hover">
 				<thead class="thead-dark">

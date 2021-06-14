@@ -42,4 +42,4 @@ def home(request):
 		results = paginator_.page(1)
 	except:
 		results = paginator_.page(paginator_.num_pages)
-	return render(request, 'polls/home.html', {'results' : results, 'fields' : fields, 'query' : query, 'analyzer' : analyzer})
+	return render(request, 'polls/home.html', {'results' : results, 'fields' : fields, 'query' : query, 'analyzer' : analyzer, 'total' : len(recipes)})
